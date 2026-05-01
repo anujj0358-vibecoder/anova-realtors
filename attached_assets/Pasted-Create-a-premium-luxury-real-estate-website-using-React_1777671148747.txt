@@ -1,0 +1,204 @@
+Create a premium luxury real estate website using React for a brand named "ANOVA Realtors".
+
+STYLE:
+- Ultra premium, minimal design
+- Black, white, gold theme
+- Elegant typography
+- Clean spacing, high-end look
+- Smooth subtle animations only
+
+-----------------------------------
+
+1. HERO SECTION:
+
+Headline:
+"Quiet Luxury. Loud Addresses."
+
+Subheadline:
+"ANOVA Realtors"
+
+Description:
+"Exclusive off-market properties across South Delhi’s most prestigious addresses."
+
+Buttons:
+- View Collection
+- Request Private Consultation
+
+-----------------------------------
+
+2. BUY / RENT SYSTEM:
+
+- Use ONLY:
+  - Buy
+  - Rent
+
+- Remove any “Lease” or “Purchase”
+- Filter properties based on selection
+
+-----------------------------------
+
+3. PROPERTIES SECTION:
+
+- Premium property cards
+- Include:
+  - Image
+  - Title
+  - Price
+  - Location
+  - Button: View Details
+
+- Add subtle hover lift animation
+
+-----------------------------------
+
+4. FOCUS LOCATIONS (IMPORTANT):
+
+Display ALL these locations in a clean grid layout (not paragraph):
+
+Aradhana Enclave  
+Anand Lok  
+Anand Niketan  
+Alaknanda  
+Chanakyapuri  
+Chittaranjan Park  
+Chhatarpur  
+Defence Colony  
+East of Kailash  
+New Friends Colony  
+Friends Colony  
+Golf Links  
+Geetanjali Enclave  
+Greater Kailash I (GK 1)  
+Greater Kailash II (GK 2)  
+Greater Kailash III (GK 3)  
+Green Park  
+Jor Bagh  
+Jungpura  
+Link Road  
+Jasola  
+Kailash Colony  
+Niti Bagh  
+Panchsheel Park  
+Pamposh Enclave  
+Safdarjung Enclave  
+Saket  
+South Extension I  
+South Extension II  
+Shanti Niketan  
+Sukhdev Vihar  
+Uday Park  
+Vasant Kunj  
+Vasant Vihar  
+
+-----------------------------------
+
+5. PRIVATE ADVISORY SECTION:
+
+Heading:
+"Initiate a Conversation"
+
+Below heading:
+"Mrs Sadhna"
+
+Below that:
+"Your Advisory"
+
+Description (premium version):
+
+"Whether acquiring an asset, divesting a property, or seeking bespoke real estate counsel, our partners are at your disposal.
+
+At ANOVA Realtors, we are recognized among Delhi’s top property advisors, built on a foundation of trust, integrity, and results. Every transaction is handled with complete transparency and a commitment to excellence.
+
+We don’t just facilitate buying or renting—we build long-term relationships that extend far beyond the deal. Thousands of families have trusted us with their dream homes, and our reputation continues to grow through consistent delivery and client satisfaction.
+
+Leading in sales, excelling in service, and standing strong on trust—we believe results speak louder than words. Experience the difference of working with a team that never compromises on values.
+
+Leading with trust. Closing with smiles. That’s how top real estate advisors work."
+
+-----------------------------------
+
+6. LEAD FORM (UPGRADED):
+
+Fields:
+- Full Name
+- Phone Number
+- Email
+- Budget (manual input, NOT dropdown)
+- Property Type (Apartment / Villa / Commercial)
+- Buy or Rent
+- Preferred Location (manual input)
+- Message / Requirement
+
+Main Button:
+"Request Private Consultation"
+
+ADDITIONAL OPTIONAL BUTTON:
+"Add Professional Details"
+
+On click:
+- Open a small popup/modal with fields:
+  - Company Name (manual input)
+  - Your Designation (manual input)
+
+Make this optional and clean UI.
+
+-----------------------------------
+
+7. WHATSAPP INTEGRATION:
+
+Use:
++91XXXXXXXXXX
+
+On submit:
+- Open WhatsApp with dynamic message
+- Show success message
+
+Message format:
+
+Hello, I am interested in a property.
+
+Name: {name}
+Phone: {phone}
+Email: {email}
+Budget: {budget}
+Type: {buy/rent}
+Location: {location}
+Company: {company}
+Designation: {designation}
+Requirement: {message}
+
+-----------------------------------
+
+8. CONTACT SECTION:
+
+Phone: +91XXXXXXXXXX  
+Email: your@email.com  
+
+-----------------------------------
+
+9. FOOTER:
+
+- Remove Instagram and LinkedIn completely
+
+Text:
+"© 2026 ANOVA Realtors. All Rights Reserved."
+
+-----------------------------------
+
+10. ANIMATIONS:
+
+- Smooth fade-in
+- Card hover lift
+- Button hover transitions
+- Keep minimal and premium
+
+-----------------------------------
+
+IMPORTANT:
+
+- Do NOT add login/signup
+- Do NOT allow property listing
+- Only collect inquiries
+- Keep UI clean and luxury
+- Ensure WhatsApp uses real user data
+- Ensure mobile responsive
