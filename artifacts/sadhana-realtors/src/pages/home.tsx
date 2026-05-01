@@ -189,7 +189,7 @@ Requirement: ${formData.requirement}`;
             </motion.h1>
 
             <motion.p variants={fadeInUp} className="text-base md:text-lg text-white/60 mb-12 max-w-xl mx-auto font-light leading-relaxed">
-              Exclusive off-market properties across South Delhi's most prestigious addresses.
+              Leading with trust. Closing with smiles. That's how top real estate advisors work. Because premium properties demand premium handling.
             </motion.p>
 
             <motion.div variants={fadeInUp} className="flex flex-col sm:flex-row items-center justify-center gap-6">
