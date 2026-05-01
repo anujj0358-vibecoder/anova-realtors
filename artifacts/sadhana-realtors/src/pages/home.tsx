@@ -58,6 +58,7 @@ const locations = [
   "Uday Park",
   "Vasant Kunj",
   "Vasant Vihar",
+  "Hauz Khas",
 ];
 
 const fadeInUp = {
@@ -421,7 +422,7 @@ Requirement: ${formData.requirement}`;
                   We don't just facilitate buying or renting — we build long-term relationships that extend far beyond the deal. Thousands of families have trusted us with their dream homes, and our reputation continues to grow through consistent delivery and client satisfaction.
                 </p>
                 <p className="text-white/80 font-light italic border-l-2 border-primary pl-4">
-                  Leading in sales, excelling in service, and standing strong on trust — leading with trust, closing with smiles.
+                  Leading with trust. Closing with smiles. That's how top real estate advisors work. Because premium properties demand premium handling.
                 </p>
               </motion.div>
 
