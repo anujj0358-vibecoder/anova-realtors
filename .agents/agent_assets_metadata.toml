@@ -1,0 +1,44 @@
+uploads = []
+outputs = []
+
+[[generated]]
+id = "YT-bfjTbZpTZCMVdbChG1"
+uri = "file://artifacts/sadhana-realtors/public/images/hero.png"
+type = "image"
+title = "Luxury mansion hero image"
+
+[[generated]]
+id = "zwGLnNYDXPHG7aJt6-F6u"
+uri = "file://artifacts/sadhana-realtors/public/images/gk.png"
+type = "image"
+title = "Luxury apartment interior"
+
+[[generated]]
+id = "yky3HUlAao5-zmn7hnPnv"
+uri = "file://artifacts/sadhana-realtors/public/images/defcol.png"
+type = "image"
+title = "Modern builder floor facade"
+
+[[generated]]
+id = "7Ne_TAdGvBEGqkB0gNJ-B"
+uri = "file://artifacts/sadhana-realtors/public/images/vasant.png"
+type = "image"
+title = "Premium villa exterior"
+
+[[generated]]
+id = "mTe_EorF2so1g-IfLSKUQ"
+uri = "file://artifacts/sadhana-realtors/public/images/safdarjung.png"
+type = "image"
+title = "Furnished modern interior"
+
+[[generated]]
+id = "OxIySdtXCpecFszxCqDPe"
+uri = "file://artifacts/sadhana-realtors/public/images/golflinks.png"
+type = "image"
+title = "Luxury penthouse terrace"
+
+[[generated]]
+id = "d1an0Kr359vt-0NTx0GCY"
+uri = "file://artifacts/sadhana-realtors/public/images/anandniketan.png"
+type = "image"
+title = "Garden villa exterior"

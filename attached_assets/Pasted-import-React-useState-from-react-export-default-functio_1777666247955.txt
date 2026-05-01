@@ -1,0 +1,144 @@
+import React, { useState } from "react";
+
+export default function App() {
+  const [type, setType] = useState("buy");
+
+  const [form, setForm] = useState({
+    name: "",
+    phone: "",
+    email: "",
+    budget: "",
+    location: "",
+    message: ""
+  });
+
+  const phoneNumber = "9667451381"; // 🔥 PUT YOUR NUMBER
+
+  const handleChange = (e) => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = () => {
+    const msg = `Hello, I am interested in a property.
+
+Name: ${form.name}
+Phone: ${form.phone}
+Email: ${form.email}
+Budget: ${form.budget}
+Type: ${type}
+Location: ${form.location}
+Requirement: ${form.message}`;
+
+    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(msg)}`;
+    window.open(url, "_blank");
+  };
+
+  const properties = [
+    {
+      title: "Luxury 4BHK in Greater Kailash",
+      price: "₹5.2 Cr",
+      location: "South Delhi"
+    },
+    {
+      title: "Modern Builder Floor in Defence Colony",
+      price: "₹3.8 Cr",
+      location: "South Delhi"
+    },
+    {
+      title: "Premium Villa in Vasant Vihar",
+      price: "₹8.5 Cr",
+      location: "South Delhi"
+    }
+  ];
+
+  return (
+    <div style={{ fontFamily: "Arial", background: "#000", color: "#fff" }}>
+      
+      {/* HERO */}
+      <div style={{ padding: "60px", textAlign: "center" }}>
+        <h1 style={{ fontSize: "40px" }}>Sadhana Realtors</h1>
+        <p>Redefining Luxury Real Estate in South Delhi</p>
+
+        <button style={btn}>Explore Properties</button>
+        <button style={{ ...btn, marginLeft: "10px" }}>Schedule a Visit</button>
+      </div>
+
+      {/* BUY / RENT */}
+      <div style={{ textAlign: "center", marginBottom: "30px" }}>
+        <button onClick={() => setType("buy")} style={typeBtn(type === "buy")}>Buy</button>
+        <button onClick={() => setType("rent")} style={typeBtn(type === "rent")}>Rent</button>
+      </div>
+
+      {/* PROPERTIES */}
+      <div style={{ display: "flex", gap: "20px", justifyContent: "center" }}>
+        {properties.map((p, i) => (
+          <div key={i} style={card}>
+            <h3>{p.title}</h3>
+            <p>{p.price}</p>
+            <p>{p.location}</p>
+            <button style={btn}>View Details</button>
+          </div>
+        ))}
+      </div>
+
+      {/* FORM */}
+      <div style={{ padding: "40px", textAlign: "center" }}>
+        <h2>Get Callback</h2>
+
+        <input name="name" placeholder="Name" onChange={handleChange} style={input}/>
+        <input name="phone" placeholder="Phone" onChange={handleChange} style={input}/>
+        <input name="email" placeholder="Email" onChange={handleChange} style={input}/>
+        <input name="budget" placeholder="Budget" onChange={handleChange} style={input}/>
+        <input name="location" placeholder="Preferred Location" onChange={handleChange} style={input}/>
+        <textarea name="message" placeholder="Requirement" onChange={handleChange} style={input}/>
+
+        <br/>
+        <button onClick={handleSubmit} style={btn}>Get Callback</button>
+      </div>
+
+      {/* CONTACT */}
+      <div style={{ textAlign: "center", padding: "20px" }}>
+        <p>📞 +9667451381</p>
+        <p>📧"anovai.magency@gmail.com" </p>
+      </div> 
+
+      {/* FOOTER */}
+      <div style={{ textAlign: "center", padding: "20px", borderTop: "1px solid #333" }}>
+        <p>© 2026 Sadhana Realtors. All Rights Reserved.</p>
+      </div>
+    </div>
+  );
+}
+
+/* STYLES */
+
+const btn = {
+  padding: "10px 20px",
+  background: "gold",
+  border: "none",
+  cursor: "pointer",
+  marginTop: "10px"
+};
+
+const card = {
+  padding: "20px",
+  background: "#111",
+  width: "250px",
+  borderRadius: "10px"
+};
+
+const input = {
+  display: "block",
+  margin: "10px auto",
+  padding: "10px",
+  width: "250px"
+};
+
+const typeBtn = (active) => ({
+  padding: "10px",
+  margin: "5px",
+  background: active ? "gold" : "#333",
+  color: "#fff",
+  border: "none"
+});
+
