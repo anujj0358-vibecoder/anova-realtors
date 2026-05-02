@@ -1,6 +1,8 @@
 import React, { useState, useEffect } from "react";
+import { Link } from "wouter";
 import { motion, AnimatePresence } from "framer-motion";
-import { MapPin, Phone, Mail, ArrowRight, ChevronRight, X, Briefcase } from "lucide-react";
+import { MapPin, Phone, Mail, ArrowRight, ChevronRight, X, Briefcase, BedDouble, Bath, Maximize2 } from "lucide-react";
+import { useListProperties } from "@workspace/api-client-react";
 import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
@@ -74,6 +76,9 @@ const staggerContainer = {
 export default function Home() {
   const [listingMode, setListingMode] = useState<"buy" | "rent">("buy");
   const [scrolled, setScrolled] = useState(false);
+
+  const { data: featuredProperties } = useListProperties({});
+  const latestThree = featuredProperties ? [...featuredProperties].reverse().slice(0, 3) : [];
   const [proModalOpen, setProModalOpen] = useState(false);
   const { toast } = useToast();
 
@@ -226,6 +231,135 @@ Requirement: ${formData.requirement}`;
             />
           </div>
         </motion.div>
+      </section>
+
+      {/* Featured Properties */}
+      <section className="py-28 relative bg-background">
+        <div className="container mx-auto px-6 md:px-12">
+
+          {/* Section header */}
+          <motion.div
+            initial="hidden"
+            whileInView="visible"
+            viewport={{ once: true, margin: "-80px" }}
+            variants={staggerContainer}
+            className="flex flex-col md:flex-row justify-between items-end mb-16 gap-6"
+          >
+            <div>
+              <motion.div variants={fadeInUp} className="text-primary uppercase tracking-[0.25em] text-xs font-semibold mb-4 flex items-center gap-4">
+                <div className="w-8 h-[1px] bg-primary" /> Featured Listings
+              </motion.div>
+              <motion.h2 variants={fadeInUp} className="text-4xl md:text-5xl font-serif text-white leading-tight">
+                Newly Added Properties
+              </motion.h2>
+            </div>
+            <motion.div variants={fadeInUp}>
+              <Link
+                href="/properties"
+                className="inline-flex items-center gap-3 text-primary text-sm uppercase tracking-widest font-semibold border-b border-primary/40 pb-1 hover:border-primary transition-colors group"
+              >
+                View All Listings
+                <ArrowRight className="w-4 h-4 group-hover:translate-x-1 transition-transform" />
+              </Link>
+            </motion.div>
+          </motion.div>
+
+          {/* Cards grid */}
+          {latestThree.length === 0 ? (
+            <motion.div
+              initial={{ opacity: 0 }}
+              whileInView={{ opacity: 1 }}
+              viewport={{ once: true }}
+              transition={{ duration: 0.6 }}
+              className="text-center py-20 text-white/30 text-sm uppercase tracking-widest"
+            >
+              No listings available yet
+            </motion.div>
+          ) : (
+            <motion.div
+              initial="hidden"
+              whileInView="visible"
+              viewport={{ once: true, margin: "-60px" }}
+              variants={{ hidden: {}, visible: { transition: { staggerChildren: 0.14 } } }}
+              className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"
+            >
+              {latestThree.map((property) => (
+                <motion.div
+                  key={property.id}
+                  variants={{
+                    hidden: { opacity: 0, y: 36 },
+                    visible: { opacity: 1, y: 0, transition: { duration: 0.75, ease: [0.22, 1, 0.36, 1] as [number, number, number, number] } }
+                  }}
+                >
+                  <Link href={`/properties/${property.id}`} className="block group">
+                    <div className="bg-card border border-white/5 group-hover:border-primary/30 transition-all duration-500 overflow-hidden flex flex-col h-full group-hover:-translate-y-1 transition-transform">
+
+                      {/* Image area */}
+                      <div className="relative h-60 overflow-hidden bg-background">
+                        {property.imageUrl ? (
+                          <img
+                            src={property.imageUrl}
+                            alt={property.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale-[0.15] group-hover:grayscale-0"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-background">
+                            <div className="text-4xl text-white/10 font-serif">◇</div>
+                            <span className="text-xs tracking-[0.2em] text-white/20 uppercase">{property.propertyType}</span>
+                          </div>
+                        )}
+
+                        {/* Type badge */}
+                        <div className={`absolute top-4 left-4 px-3 py-1 text-[10px] font-bold tracking-widest uppercase ${property.type === "buy" ? "bg-primary text-background" : "border border-primary text-primary bg-background/70 backdrop-blur-sm"}`}>
+                          {property.type === "buy" ? "For Sale" : "For Rent"}
+                        </div>
+
+                        {/* Hover overlay */}
+                        <div className="absolute inset-0 bg-black/30 opacity-0 group-hover:opacity-0 transition-opacity duration-500" />
+                      </div>
+
+                      {/* Content */}
+                      <div className="p-7 flex flex-col flex-grow">
+                        <p className="text-primary text-[11px] uppercase tracking-[0.22em] font-semibold mb-2">{property.location}</p>
+                        <h3 className="text-white text-lg font-medium leading-snug mb-3 group-hover:text-primary/90 transition-colors">{property.title}</h3>
+                        <p className="text-primary text-2xl font-serif mb-5">{property.price}</p>
+
+                        {/* Specs row */}
+                        {(property.beds || property.baths || property.area) && (
+                          <div className="flex gap-5 text-white/40 text-xs mb-6 border-t border-white/5 pt-5">
+                            {property.beds && (
+                              <span className="flex items-center gap-1.5">
+                                <BedDouble className="w-3.5 h-3.5 text-white/25" strokeWidth={1.5} />
+                                {property.beds} Beds
+                              </span>
+                            )}
+                            {property.baths && (
+                              <span className="flex items-center gap-1.5">
+                                <Bath className="w-3.5 h-3.5 text-white/25" strokeWidth={1.5} />
+                                {property.baths} Baths
+                              </span>
+                            )}
+                            {property.area && (
+                              <span className="flex items-center gap-1.5">
+                                <Maximize2 className="w-3.5 h-3.5 text-white/25" strokeWidth={1.5} />
+                                {property.area}
+                              </span>
+                            )}
+                          </div>
+                        )}
+
+                        {/* CTA */}
+                        <div className="mt-auto flex items-center gap-2 text-primary text-xs uppercase tracking-widest font-semibold group-hover:gap-4 transition-all duration-300">
+                          View Details <ChevronRight className="w-3.5 h-3.5" />
+                        </div>
+                      </div>
+                    </div>
+                  </Link>
+                </motion.div>
+              ))}
+            </motion.div>
+          )}
+        </div>
       </section>
 
       {/* Philosophy */}
