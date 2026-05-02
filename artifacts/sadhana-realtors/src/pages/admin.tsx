@@ -1,9 +1,11 @@
 import { useState } from "react";
 import { Link } from "wouter";
+import { useQueryClient } from "@tanstack/react-query";
 import {
   useListProperties,
   useCreateProperty,
   useDeleteProperty,
+  getListPropertiesQueryKey,
 } from "@workspace/api-client-react";
 import type { CreatePropertyBody } from "@workspace/api-client-react";
 
@@ -40,7 +42,11 @@ export default function AdminPage() {
   const [successMsg, setSuccessMsg] = useState("");
   const [errorMsg, setErrorMsg] = useState("");
 
-  const { data: properties, isLoading, refetch } = useListProperties({});
+  const queryClient = useQueryClient();
+  const { data: properties, isLoading } = useListProperties({});
+
+  const invalidateListings = () =>
+    queryClient.invalidateQueries({ queryKey: getListPropertiesQueryKey() });
 
   const createMutation = useCreateProperty({
     mutation: {
@@ -48,7 +54,7 @@ export default function AdminPage() {
         setForm({ ...emptyForm });
         setSuccessMsg("Property added successfully.");
         setErrorMsg("");
-        void refetch();
+        void invalidateListings();
         setTimeout(() => setSuccessMsg(""), 4000);
       },
       onError: () => {
@@ -61,7 +67,7 @@ export default function AdminPage() {
     mutation: {
       onSuccess: () => {
         setDeletingId(null);
-        void refetch();
+        void invalidateListings();
       },
     },
   });
