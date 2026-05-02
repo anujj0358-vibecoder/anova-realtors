@@ -8,3 +8,101 @@
 export interface HealthStatus {
   status: string;
 }
+
+export type PropertyType = (typeof PropertyType)[keyof typeof PropertyType];
+
+export const PropertyType = {
+  buy: "buy",
+  rent: "rent",
+} as const;
+
+export interface Property {
+  id: number;
+  title: string;
+  price: string;
+  priceValue: number;
+  location: string;
+  type: PropertyType;
+  propertyType: string;
+  /** @nullable */
+  description?: string | null;
+  /** @nullable */
+  imageUrl?: string | null;
+  /** @nullable */
+  beds?: number | null;
+  /** @nullable */
+  baths?: number | null;
+  /** @nullable */
+  area?: string | null;
+  createdAt: string;
+}
+
+export type CreatePropertyBodyType =
+  (typeof CreatePropertyBodyType)[keyof typeof CreatePropertyBodyType];
+
+export const CreatePropertyBodyType = {
+  buy: "buy",
+  rent: "rent",
+} as const;
+
+export interface CreatePropertyBody {
+  title: string;
+  price: string;
+  priceValue: number;
+  location: string;
+  type: CreatePropertyBodyType;
+  propertyType: string;
+  /** @nullable */
+  description?: string | null;
+  /** @nullable */
+  imageUrl?: string | null;
+  /** @nullable */
+  beds?: number | null;
+  /** @nullable */
+  baths?: number | null;
+  /** @nullable */
+  area?: string | null;
+}
+
+export type UpdatePropertyBodyType =
+  (typeof UpdatePropertyBodyType)[keyof typeof UpdatePropertyBodyType];
+
+export const UpdatePropertyBodyType = {
+  buy: "buy",
+  rent: "rent",
+} as const;
+
+export interface UpdatePropertyBody {
+  title?: string;
+  price?: string;
+  priceValue?: number;
+  location?: string;
+  type?: UpdatePropertyBodyType;
+  propertyType?: string;
+  /** @nullable */
+  description?: string | null;
+  /** @nullable */
+  imageUrl?: string | null;
+  /** @nullable */
+  beds?: number | null;
+  /** @nullable */
+  baths?: number | null;
+  /** @nullable */
+  area?: string | null;
+}
+
+export type ListPropertiesParams = {
+  type?: ListPropertiesType;
+  location?: string;
+  minBudget?: number;
+  maxBudget?: number;
+  propertyType?: string;
+};
+
+export type ListPropertiesType =
+  (typeof ListPropertiesType)[keyof typeof ListPropertiesType];
+
+export const ListPropertiesType = {
+  buy: "buy",
+  rent: "rent",
+} as const;
