@@ -12,18 +12,6 @@ import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@
 import { Dialog, DialogContent, DialogHeader, DialogTitle } from "@/components/ui/dialog";
 import { useToast } from "@/hooks/use-toast";
 
-const properties = {
-  buy: [
-    { id: 1, title: "Luxury 4BHK in Greater Kailash", price: "₹5.2 Cr", location: "South Delhi", specs: "4 Beds • 4 Baths • 3,200 sq.ft", image: "/images/gk.png" },
-    { id: 2, title: "Modern Builder Floor in Defence Colony", price: "₹3.8 Cr", location: "South Delhi", specs: "3 Beds • 3 Baths • 2,400 sq.ft", image: "/images/defcol.png" },
-    { id: 3, title: "Premium Villa in Vasant Vihar", price: "₹8.5 Cr", location: "South Delhi", specs: "5 Beds • 6 Baths • 6,500 sq.ft", image: "/images/vasant.png" }
-  ],
-  rent: [
-    { id: 4, title: "Furnished 3BHK in Safdarjung Enclave", price: "₹1.2L/month", location: "South Delhi", specs: "3 Beds • 3 Baths • 2,100 sq.ft", image: "/images/safdarjung.png" },
-    { id: 5, title: "Penthouse in Golf Links", price: "₹2.5L/month", location: "Central Delhi", specs: "4 Beds • 5 Baths • 4,800 sq.ft", image: "/images/golflinks.png" },
-    { id: 6, title: "Garden Villa in Anand Niketan", price: "₹95K/month", location: "South Delhi", specs: "3 Beds • 3 Baths • 2,800 sq.ft", image: "/images/anandniketan.png" }
-  ]
-};
 
 const locations = [
   "Aradhana Enclave",
@@ -79,6 +67,7 @@ export default function Home() {
 
   const { data: featuredProperties } = useListProperties({});
   const latestThree = featuredProperties ? [...featuredProperties].reverse().slice(0, 3) : [];
+  const { data: curatedProperties } = useListProperties({ type: listingMode });
   const [proModalOpen, setProModalOpen] = useState(false);
   const { toast } = useToast();
 
@@ -450,7 +439,7 @@ Requirement: ${formData.requirement}`;
 
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             <AnimatePresence>
-              {properties[listingMode].map((property, idx) => (
+              {(curatedProperties ?? []).map((property, idx) => (
                 <motion.div
                   key={property.id}
                   initial={{ opacity: 0, y: 20 }}
@@ -458,30 +447,47 @@ Requirement: ${formData.requirement}`;
                   exit={{ opacity: 0, y: -20 }}
                   transition={{ duration: 0.5, delay: idx * 0.1 }}
                 >
-                  <Card
-                    className="bg-background border-none rounded-none overflow-hidden group cursor-pointer h-full flex flex-col hover:-translate-y-2 transition-transform duration-500"
-                    data-testid={`card-property-${property.id}`}
-                  >
-                    <div className="relative h-72 overflow-hidden">
-                      <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
-                      <img
-                        src={property.image}
-                        alt={property.title}
-                        className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
-                      />
-                      <div className="absolute top-4 left-4 z-20 bg-background/80 backdrop-blur-md px-4 py-2 text-xs font-semibold tracking-widest uppercase border border-white/10 text-white">
-                        {property.location}
+                  <Link href={`/properties/${property.id}`} className="block h-full">
+                    <Card
+                      className="bg-background border-none rounded-none overflow-hidden group cursor-pointer h-full flex flex-col hover:-translate-y-2 transition-transform duration-500"
+                      data-testid={`card-property-${property.id}`}
+                    >
+                      <div className="relative h-72 overflow-hidden">
+                        <div className="absolute inset-0 bg-black/20 group-hover:bg-transparent transition-colors duration-500 z-10" />
+                        {property.imageUrl ? (
+                          <img
+                            src={property.imageUrl}
+                            alt={property.title}
+                            className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
+                          />
+                        ) : (
+                          <div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-card">
+                            <div className="text-4xl text-white/10 font-serif">◇</div>
+                            <span className="text-xs tracking-[0.2em] text-white/20 uppercase">{property.propertyType}</span>
+                          </div>
+                        )}
+                        <div className="absolute top-4 left-4 z-20 bg-background/80 backdrop-blur-md px-4 py-2 text-xs font-semibold tracking-widest uppercase border border-white/10 text-white">
+                          {property.location}
+                        </div>
                       </div>
-                    </div>
-                    <CardContent className="p-8 flex flex-col flex-grow border border-t-0 border-white/5 group-hover:border-primary/30 transition-colors duration-500">
-                      <div className="text-primary text-2xl font-serif mb-4 font-medium">{property.price}</div>
-                      <h3 className="text-xl text-white font-medium mb-4 leading-snug">{property.title}</h3>
-                      <div className="text-white/50 text-sm mb-8 font-light tracking-wide">{property.specs}</div>
-                      <div className="mt-auto flex items-center text-primary text-sm uppercase tracking-widest font-semibold group-hover:gap-4 transition-all gap-2">
-                        View Details <ChevronRight className="w-4 h-4" />
-                      </div>
-                    </CardContent>
-                  </Card>
+                      <CardContent className="p-8 flex flex-col flex-grow border border-t-0 border-white/5 group-hover:border-primary/30 transition-colors duration-500">
+                        <div className="text-primary text-2xl font-serif mb-4 font-medium">{property.price}</div>
+                        <h3 className="text-xl text-white font-medium mb-4 leading-snug">{property.title}</h3>
+                        {(property.beds || property.baths || property.area) && (
+                          <div className="text-white/50 text-sm mb-8 font-light tracking-wide">
+                            {[
+                              property.beds ? `${property.beds} Beds` : null,
+                              property.baths ? `${property.baths} Baths` : null,
+                              property.area ?? null,
+                            ].filter(Boolean).join(" • ")}
+                          </div>
+                        )}
+                        <div className="mt-auto flex items-center text-primary text-sm uppercase tracking-widest font-semibold group-hover:gap-4 transition-all gap-2">
+                          View Details <ChevronRight className="w-4 h-4" />
+                        </div>
+                      </CardContent>
+                    </Card>
+                  </Link>
                 </motion.div>
               ))}
             </AnimatePresence>
@@ -557,6 +563,9 @@ Requirement: ${formData.requirement}`;
                 </p>
                 <p className="text-white/80 font-light italic border-l-2 border-primary pl-4">
                   Leading with trust. Closing with smiles. That's how top real estate advisors work. Because premium properties demand premium handling.
+                  <span style={{ display: "block", marginTop: "14px", color: "#c9a84c", fontSize: "1.15em", fontWeight: 300, fontStyle: "normal", letterSpacing: "0.04em" }}>
+                    Sadhna Mishra
+                  </span>
                 </p>
               </motion.div>
 
