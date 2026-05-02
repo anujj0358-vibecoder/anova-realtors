@@ -292,9 +292,9 @@ Requirement: ${formData.requirement}`;
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-105 grayscale-[0.15] group-hover:grayscale-0"
                           />
                         ) : (
-                          <div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-background">
-                            <div className="text-4xl text-white/10 font-serif">◇</div>
-                            <span className="text-xs tracking-[0.2em] text-white/20 uppercase">{property.propertyType}</span>
+                          <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-background">
+                            <span style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#c9a84c", fontWeight: 300 }}>Contact our specialist</span>
+                            <span style={{ fontSize: 15, color: "#ffffff", fontWeight: 700, letterSpacing: "0.04em" }}>+91- 96674 51381</span>
                           </div>
                         )}
 
@@ -461,9 +461,9 @@ Requirement: ${formData.requirement}`;
                             className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110 grayscale-[0.2] group-hover:grayscale-0"
                           />
                         ) : (
-                          <div className="w-full h-full flex flex-col items-center justify-center gap-3 bg-card">
-                            <div className="text-4xl text-white/10 font-serif">◇</div>
-                            <span className="text-xs tracking-[0.2em] text-white/20 uppercase">{property.propertyType}</span>
+                          <div className="w-full h-full flex flex-col items-center justify-center gap-2 bg-card">
+                            <span style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#c9a84c", fontWeight: 300 }}>Contact our specialist</span>
+                            <span style={{ fontSize: 15, color: "#ffffff", fontWeight: 700, letterSpacing: "0.04em" }}>+91- 96674 51381</span>
                           </div>
                         )}
                         <div className="absolute top-4 left-4 z-20 bg-background/80 backdrop-blur-md px-4 py-2 text-xs font-semibold tracking-widest uppercase border border-white/10 text-white">

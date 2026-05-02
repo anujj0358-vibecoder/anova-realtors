@@ -198,8 +198,8 @@ function PropertyCard({ property }: { property: { id: number; title: string; pri
             <img src={property.imageUrl} alt={property.title} style={{ width: "100%", height: "100%", objectFit: "cover" }} />
           ) : (
             <div style={{ width: "100%", height: "100%", display: "flex", alignItems: "center", justifyContent: "center", flexDirection: "column", gap: 8 }}>
-              <span style={{ fontSize: 32, color: "#333" }}>◇</span>
-              <span style={{ fontSize: 11, color: "#444", letterSpacing: "0.1em" }}>{property.propertyType}</span>
+              <span style={{ fontSize: 11, letterSpacing: "0.18em", textTransform: "uppercase", color: "#c9a84c", fontWeight: 300 }}>Contact our specialist</span>
+              <span style={{ fontSize: 15, color: "#ffffff", fontWeight: 700, letterSpacing: "0.04em" }}>+91- 96674 51381</span>
             </div>
           )}
           <div style={{
